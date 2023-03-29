@@ -1,0 +1,36 @@
+from selenium import webdriver
+from test_functions import *
+
+# Define the web drivers to use
+chrome_driver = webdriver.Chrome()
+firefox_driver = webdriver.Firefox()
+edge_driver = webdriver.Edge()
+
+# Define the selectors to use
+id_selector = "id"
+xpath_selector = "xpath"
+css_selector = "css_selector"
+
+# Run the tests with different configurations
+print("Running tests with Chrome driver and ID selector...")
+chrome_test = TestSauceDemo()
+chrome_test.driver = chrome_driver
+chrome_test.selector = id_selector
+unittest.TextTestRunner(verbosity=2).run(unittest.TestLoader().loadTestsFromModule(chrome_test))
+
+print("\nRunning tests with Firefox driver and XPath selector...")
+firefox_test = TestSauceDemo()
+firefox_test.driver = firefox_driver
+firefox_test.selector = xpath_selector
+unittest.TextTestRunner(verbosity=2).run(unittest.TestLoader().loadTestsFromModule(firefox_test))
+
+print("\nRunning tests with Edge driver and CSS selector...")
+edge_test = TestSauceDemo()
+edge_test.driver = edge_driver
+edge_test.selector = css_selector
+unittest.TextTestRunner(verbosity=2).run(unittest.TestLoader().loadTestsFromModule(edge_test))
+
+# Quit the web drivers
+chrome_driver.quit()
+firefox_driver.quit()
+edge_driver.quit()
